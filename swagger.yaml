@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: API Plantes
+  version: 1.0.0
+
+paths:
+  /plants:
+    get:
+      summary: Obtenir toutes les plantes
+      responses:
+        '200':
+          description: Liste des plantes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plante'
+    post:
+      summary: Ajouter une plante
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanteInput'
+      responses:
+        '201':
+          description: Plante ajoutée
+
+  /plants/{id}:
+    get:
+      summary: Obtenir une plante par ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Plante trouvée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plante'
+        '404':
+          description: Plante non trouvée
+    put:
+      summary: Mettre à jour une plante
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanteInput'
+      responses:
+        '200':
+          description: Plante mise à jour
+    delete:
+      summary: Supprimer une plante
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Plante supprimée
+
+components:
+  schemas:
+    Plante:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        species:
+          type: string
+        sunlight:
+          type: string
+        watering:
+          type: string
+        pet_friendly:
+          type: boolean
+        height_cm:
+          type: integer
+    PlanteInput:
+      type: object
+      properties:
+        name:
+          type: string
+        species:
+          type: string
+        sunlight:
+          type: string
+        watering:
+          type: string
+        pet_friendly:
+          type: boolean
+        height_cm:
+          type: integer
+      required:
+        - name
+        - species
+        - sunlight
+        - watering
+        - pet_friendly
+        - height_cm
