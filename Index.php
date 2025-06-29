@@ -4,19 +4,20 @@ $pdo = new PDO('mysql:host=localhost;dbname=plant_db;charset=utf8', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Inclure le contrôleur des plantes
-require 'Plants.php';
+require_once 'Plants.php';
 
 // Router très basique
-$request = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
+$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$request = str_replace('/ExamenGEBDPlants/Index.php', '', $request);
 
-if (preg_match('#^/plants/?$#', $request)) {
+if (preg_match('#^/Plants/?$#', $request)) {
     if ($method === 'GET') {
         getAllPlants();
     } elseif ($method === 'POST') {
         createPlant();
     }
-} elseif (preg_match('#^/plants/(\d+)$#', $request, $matches)) {
+} elseif (preg_match('#^/Plants/(\d+)$#', $request, $matches)) {
     $id = (int)$matches[1];
     if ($method === 'GET') {
         getPlant($id);

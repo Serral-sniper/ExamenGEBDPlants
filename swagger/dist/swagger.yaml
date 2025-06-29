@@ -4,10 +4,10 @@ info:
   version: 1.0.0
 
 servers:
-  - url: http://localhost/plantes-api
+  - url: http://localhost/ExamenGEBDPlants/Index.php  # ✅ chemin correct
 
 paths:
-  /plants:
+  /Plants:
     get:
       summary: Obtenir toutes les plantes
       responses:
@@ -31,7 +31,7 @@ paths:
         '201':
           description: Plante ajoutée
 
-  /plants/{id}:
+  /Plants/{id}:
     get:
       summary: Obtenir une plante par ID
       parameters:

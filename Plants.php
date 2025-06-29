@@ -1,10 +1,10 @@
 <?php
-require 'Index.php';
+require_once 'Index.php';
 
 function getAllPlants() {
     global $pdo;
     $stmt = $pdo->query("SELECT * FROM plants");
-    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 }
 
 function getPlant($id) {
@@ -13,7 +13,7 @@ function getPlant($id) {
     $stmt->execute([$id]);
     $plant = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($plant) {
-        echo json_encode($plant);
+        echo json_encode($plant, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     } else {
         http_response_code(404);
         echo json_encode(['error' => 'Not found']);
