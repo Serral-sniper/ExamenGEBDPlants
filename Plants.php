@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require 'Index.php';
 
 function getAllPlants() {
     global $pdo;

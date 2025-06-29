@@ -3,6 +3,9 @@ info:
   title: API Plantes
   version: 1.0.0
 
+servers:
+  - url: http://localhost/plantes-api
+
 paths:
   /plants:
     get:
